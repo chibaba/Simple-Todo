@@ -16,6 +16,9 @@ public class TodoLab<Todo> {
         }
         return  dTodoLab;
     }
+    public void deleteTask(int index) {
+        sListTodo.remove(index);
+    }
     public void addTodo (Todo todo) {
         sListTodo.add(todo);
     }
