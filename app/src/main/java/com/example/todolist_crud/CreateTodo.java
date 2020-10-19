@@ -9,6 +9,6 @@ public class CreateTodo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_todo);
+        setContentView(R.layout.activity_todo);
     }
 }
