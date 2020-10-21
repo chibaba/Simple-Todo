@@ -32,7 +32,7 @@ public class DatePickerDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog (Bundle savedInstanceState) {
-        view = LayoutInflater.from(getActivity()).inflate(R.layout.dateDialog_picker, null);
+        view = LayoutInflater.from(getActivity()).inflate(R.layout.date_dialog_picker, null);
         sDatePicker = view.findViewById(R.id.et_date_picker);
         return new AlertDialog.Builder(getActivity())
                 .setView(view)
