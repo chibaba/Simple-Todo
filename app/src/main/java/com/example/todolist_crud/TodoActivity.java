@@ -49,9 +49,7 @@ public class TodoActivity extends AppCompatActivity {
                 startAnother();
             }
         });
-
-
-
+        removalListerner();
 
     }
 }
