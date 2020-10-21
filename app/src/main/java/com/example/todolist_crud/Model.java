@@ -7,7 +7,8 @@ public class Model {
     private String title;
     private Time time;
     private boolean done;
-    private Date date;
+    private String date;
+    private boolean checked;
 
     public String getTitle() {
         return title;
@@ -33,11 +34,19 @@ public class Model {
         this.done = done;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    public boolean getChecked() {
+        return checked;
     }
 }
