@@ -5,7 +5,7 @@
     <string name="actualDate">Actual Date</string>
     <string name="checkedBox">Checked Box</string>
     <string name="set_time">Set Time</string>
-    <string name="project">Create Project</string>
+    <string name="project">Create Todo list</string>
     <string name="title">enter title</string>
     <string name="to_delete">To delete</string>
     <string name="date_setter_head">Please enter a date</string>
