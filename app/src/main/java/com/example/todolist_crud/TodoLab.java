@@ -3,9 +3,9 @@ package com.example.todolist_crud;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TodoLab<Todo> {
+public class TodoLab {
     private static  TodoLab dTodoLab;
-    List<Todo> sListTodo;
+    List<Model> sListTodo;
 
     private  TodoLab() {
         sListTodo = new ArrayList<>();
@@ -22,7 +22,7 @@ public class TodoLab<Todo> {
     public void addTodo (Model todo) {
         sListTodo.add(todo);
     }
-    public List<Todo>getTodos() {
+    public List<Model>getTodos() {
         return sListTodo;
     }
 }
