@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -49,7 +50,41 @@ public class TodoActivity extends AppCompatActivity {
                 startAnother();
             }
         });
-        removalListerner();
+
+        removalListener();
+
+    }
+
+    private void removalListener() {
+        myAdapter.setListenerForAdapter(new TaskAdapter.TaskAdapterListener() {
+            @Override
+            public void onClickdelete(int position) {
+                TodoLab.get().deleteTask(position);
+                myAdapter.notifyItemRemoved(position);
+                setEmptyText();
+            }
+        });
+    }
+
+
+    private void startAnother() {
+        Intent intent = new Intent(TodoActivity.this, CreateTodo.class);
+        startActivity(intent);
+    }
+
+    private void defineViews() {
+        btn_flt = findViewById(R.id.et_FAB);
+        myRecyclerView = findViewById(R.id.et_cv);
+        empty_tv = findViewById(R.id.empty_tv);
+        textView = findViewById(R.id.et_tv);
+    }
+    private void setEmptyText() {
+        if (myAdapter.getItemCount() > 0) {
+            Log.d("TodActivity", "" + myAdapter.getItemCount());
+            empty_tv.setVisibility(View.GONE);
+        } else {
+            empty_tv.setVisibility(View.VISIBLE);
+        }
 
     }
 }
