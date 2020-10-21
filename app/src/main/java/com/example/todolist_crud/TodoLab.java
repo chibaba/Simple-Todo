@@ -19,7 +19,7 @@ public class TodoLab<Todo> {
     public void deleteTask(int index) {
         sListTodo.remove(index);
     }
-    public void addTodo (Todo todo) {
+    public void addTodo (Model todo) {
         sListTodo.add(todo);
     }
     public List<Todo>getTodos() {

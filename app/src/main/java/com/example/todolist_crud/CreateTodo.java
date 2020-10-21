@@ -3,7 +3,6 @@ package com.example.todolist_crud;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,17 +23,17 @@ public class CreateTodo extends AppCompatActivity implements DatePickerDialog.Da
     private Button setTime;
     private Button btnAdd;
     private Button btn_setDate;
-    private Task dtask = new Task();
+    private Model dtask = new Model();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_todo);
+        setContentView(R.layout.create_todos);
 
         dTitleField = findViewById(R.id.et_title);
-        setTime = findViewById(R.id.et_time);
+        setTime = findViewById(R.id.et_timesette);
         btnAdd = findViewById(R.id.et_addBtn);
-         btn_setDate = findViewById(R.id.et_date);
+         btn_setDate = findViewById(R.id.btn_date);
 
 
         dTitleField.addTextChangedListener(new TextWatcher() {
@@ -72,8 +71,9 @@ public class CreateTodo extends AppCompatActivity implements DatePickerDialog.Da
         btnAdd.setOnClickListener(this);
     }
      @Override
-    public void dateListerner(int year, int month, int day) {
-         SimpleDateFormat formattedDate = new SimpleDateFormat("DD-MM-YYYY");
+    public void dateListener (int year, int month, int day) {
+
+         SimpleDateFormat formattedDate = new SimpleDateFormat("dd-mm-yyyy");
          Date date = new GregorianCalendar(year, month, day).getTime();
          String dateFormatted = formattedDate.format(date);
          dtask.setDate(dateFormatted);
@@ -82,11 +82,11 @@ public class CreateTodo extends AppCompatActivity implements DatePickerDialog.Da
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.et_dateStr:
-                TimePickerDialog dialog = new TimePickerDialog();
-                showPopUp(dialog,DIALOG_TIME);
+            case R.id.et_timesette  :
+                TimePickerDialog dialog_time = new TimePickerDialog();
+                showPopUp(dialog_time,DIALOG_TIME);
                 break;
-            case R.id.et_date:
+            case R.id.btn_date:
                 DatePickerDialog dialog_date = new DatePickerDialog();
                 showPopUp(dialog_date,DIALOG_DATE);
                 break;

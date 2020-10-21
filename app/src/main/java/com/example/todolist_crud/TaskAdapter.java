@@ -13,13 +13,15 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
 
-    private List<Task>dTask;
+    private List<Model> dTask;
     private Context context ;
-    private TaskAdapterListerner listerner;
+    private TaskAdapterListener listener;
 
-    public TaskAdapter(List<Task>dTask, Context context) {
+    public TaskAdapter(List<Model>dTask, Context context) {
         this.dTask = dTask;
         this.context = context;
     }
@@ -33,8 +35,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TaskAdapter TaskHolder holder, int position) {
-        final Task dBindTask = dTask.get(position);
+    public void onBindViewHolder(@NonNull  TaskHolder holder, int position) {
+        final Model dBindTask = dTask.get(position);
         holder.specTitle.setText(dBindTask.getTitle());
         if(dBindTask.getDate() != null) {
             holder.dateStr.setText(dBindTask.getDate().toString());
@@ -43,7 +45,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
             dBindTask.setChecked(true);
         }
 
-        holder.box.setOnCheckedChangeListerner( new CompoundButton.OnCheckedChangeListener() {
+        holder.box.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener() {
             @Override
                     public  void onCheckedChanged(CompoundButton  compoundButton, boolean b) {
 
@@ -58,8 +60,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
     }
 
 
-    public void setListernerForAdapter(TaskAdapterListerner listerner){
-        this.listerner =listerner;
+    public void setListenerForAdapter(TaskAdapterListener listerner){
+        this.listener =listerner;
     }
 
     public class TaskHolder extends RecyclerView.ViewHolder {
@@ -70,9 +72,26 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
         public TaskHolder(View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.et_cardPv);
+            specTitle = itemView.findViewById(R.id.et_realTitle);
+            dateStr = itemView.findViewById(R.id.date_str);
+            box = itemView.findViewById(R.id.et_checkBox);
+            imageView = itemView.findViewById(R.id.imageView);
+
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null) {
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onClickdelete(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
-//    public interface TaskHolder {
-//    }
+public interface  TaskAdapterListener{
+        void onClickdelete(int position);
+}
 }

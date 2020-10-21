@@ -24,14 +24,14 @@
         />
     </com.google.android.material.textfield.TextInputLayout>
     <Button
-        android:id="@+id/et_date"
+        android:id="@+id/btn_date"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/et_time"
+        app:layout_constraintBottom_toBottomOf="@+id/et_timesette"
         app:layout_constraintStart_toStartOf="@+id/et_tInputLayout"
-        app:layout_constraintTop_toTopOf="@+id/et_time" />
+        app:layout_constraintTop_toTopOf="@+id/et_timesette" />
     <Button
-        android:id="@+id/et_time"
+        android:id="@+id/et_timesette"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -45,9 +45,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="@string/add_todos"
-        app:layout_constraintEnd_toEndOf="@id/et_time"
+        app:layout_constraintEnd_toEndOf="@id/et_timesette"
         app:layout_constraintHorizontal_bias="0.50"
-        app:layout_constraintStart_toStartOf="@+id/et_date"
+        app:layout_constraintStart_toStartOf="@+id/btn_date"
         app:layout_constraintTop_toBottomOf="@+id/et_tInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
-public class TimePicker  extends DialogFragment {
+public class TimePickerDialog extends  DialogFragment {
 
     private View view;
     @Override
