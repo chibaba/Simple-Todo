@@ -10,5 +10,6 @@
     <string name="to_delete">To delete</string>
     <string name="date_setter_head">Please enter a date</string>
     <string name="add_todos">Add Todos</string>
+    <string name="todo">TODO</string>
     <string name="empty">Empty list , please add todo list</string>
 </resources>

@@ -50,4 +50,17 @@
         app:layout_constraintStart_toStartOf="@+id/btn_date"
         app:layout_constraintTop_toBottomOf="@+id/et_tInputLayout" />
 
+
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_tInputLayout"
+        tools:srcCompat="@tools:sample/avatars" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

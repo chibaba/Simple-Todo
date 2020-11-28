@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class CreateTodo extends AppCompatActivity implements DatePickerDialog.DateKeysListener, View.OnClickListener {
+public class    CreateTodo extends AppCompatActivity implements DatePickerDialog.DateKeysListener, View.OnClickListener {
     private static  final String DIALOG_DATE = "DialogDate";
     private static final String DIALOG_TIME = "DialogTime";
 
@@ -60,7 +60,7 @@ public class CreateTodo extends AppCompatActivity implements DatePickerDialog.Da
             return;
         }
         dtask.setTitle(dTitleField.getText().toString());
-        TodoLab.get().addTodo(dtask);
+        new TaskViewModel(getApplication()).addTodo(dtask);
         finish();
 
     }
@@ -73,7 +73,7 @@ public class CreateTodo extends AppCompatActivity implements DatePickerDialog.Da
      @Override
     public void dateListener (int year, int month, int day) {
 
-         SimpleDateFormat formattedDate = new SimpleDateFormat("dd-mm-yyyy");
+         SimpleDateFormat formattedDate = new SimpleDateFormat("dd-MMM-yyyy");
          Date date = new GregorianCalendar(year, month, day).getTime();
          String dateFormatted = formattedDate.format(date);
          dtask.setDate(dateFormatted);
