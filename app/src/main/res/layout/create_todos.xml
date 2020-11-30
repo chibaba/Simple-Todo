@@ -23,31 +23,48 @@
         android:hint="@string/placeholder"
         />
     </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/btn_date"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
+        android:text="@string/set_date"
         app:layout_constraintBottom_toBottomOf="@+id/et_timesette"
+        app:layout_constraintEnd_toStartOf="@+id/et_timesette"
         app:layout_constraintStart_toStartOf="@+id/et_tInputLayout"
         app:layout_constraintTop_toTopOf="@+id/et_timesette" />
     <Button
         android:id="@+id/et_timesette"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         android:text="@string/set_time"
         app:layout_constraintEnd_toEndOf="@+id/et_tInputLayout"
-        app:layout_constraintTop_toBottomOf="@id/et_tInputLayout"
+        app:layout_constraintStart_toEndOf="@id/et_tInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/imgView"
         />
     <Button
         android:id="@+id/et_addBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="4dp"
         android:text="@string/add_todos"
         app:layout_constraintEnd_toEndOf="@id/et_timesette"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/btn_date"
-        app:layout_constraintTop_toBottomOf="@+id/et_tInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/et_timesette" />
+
+
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="300dp"
+        android:layout_height="148dp"
+        android:layout_marginTop="13dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_tInputLayout"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
