@@ -1,21 +1,34 @@
 package com.example.todolist_crud;
 
+import android.content.Context;
+
+import androidx.lifecycle.LiveData;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TodoLab {
+    private List<Model> sListTodo;
+    private LiveData<List<Model>> models;
+    private TodoDao todoDao;
     private static  TodoLab dTodoLab;
-    List<Model> sListTodo;
 
-    private  TodoLab() {
+    private  TodoLab(Context context) {
+        TodoDatabase database = TodoDatabase.getTodoDatabaseInstance(context.getApplicationContext());
+        todoDao = database.todoDao();
+
+        todos = todoDao.getAllTasks();
         sListTodo = new ArrayList<>();
     }
-    public static TodoLab get() {
+    public static TodoLab getTaskLab(Context context) {
         if (dTodoLab == null) {
-            dTodoLab = new TodoLab();
+            dTodoLab = new TodoLab(context);
         }
         return  dTodoLab;
     }
+
+    public LiveData<List<Model>>
+
     public void deleteTask(int index) {
         sListTodo.remove(index);
     }
