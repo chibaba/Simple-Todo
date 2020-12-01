@@ -1,38 +1,67 @@
 package com.example.todolist_crud;
 
-import java.sql.Date;
-import java.sql.Time;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+
+import java.util.UUID;
+
+import io.reactivex.rxjava3.annotations.NonNull;
+
+@Entity(tableName = "Task_table")
 
 public class Model {
-    private String title;
-    private Time time;
-    private boolean done;
-    private String date;
-    private boolean checked;
 
-    public String getTitle() {
-        return title;
+
+    @PrimaryKey
+    @NonNull
+
+    private String title    ;
+    private String uuid;
+    private int done;
+    private String date;
+    private String image;
+
+
+    public Model() {
+        this.done = 0;
+        uuid = UUID.randomUUID().toString();
+    }
+
+    public int getDone() {
+        return done;
+    }
+
+    public void setDone(int done) {
+        this.done = done;
+    }
+
+    public String getUuid() {
+        return  uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public Time getTime() {
-        return time;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
+
+    public String getImage() {
+        return image;
     }
 
-    public boolean isDone() {
-        return done;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
-    }
+
 
     public String getDate() {
         return date;
@@ -42,11 +71,5 @@ public class Model {
         this.date = date;
     }
 
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
 
-    public boolean getChecked() {
-        return checked;
-    }
 }
