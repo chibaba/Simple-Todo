@@ -1,16 +1,26 @@
 package com.example.todolist_crud;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -24,12 +34,15 @@ public class    CreateTodo extends AppCompatActivity implements DatePickerDialog
     private Button btnAdd;
     private Button btn_setDate;
     private Model dtask = new Model();
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private ImageView imageView;
+    private Uri photoURI;
+    private static final String TAG = "CreateTodo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_todos);
-
         dTitleField = findViewById(R.id.et_title);
         setTime = findViewById(R.id.et_timesette);
         btnAdd = findViewById(R.id.et_addBtn);
@@ -59,6 +72,9 @@ public class    CreateTodo extends AppCompatActivity implements DatePickerDialog
         if (dTitleField.getText().toString().equals(""))  {
             return;
         }
+        if(photoURI != null) {
+            dtask.setImage(photoURI.toString());
+        }
         dtask.setTitle(dTitleField.getText().toString());
         new TaskViewModel(getApplication()).addTodo(dtask);
         finish();
@@ -83,8 +99,7 @@ public class    CreateTodo extends AppCompatActivity implements DatePickerDialog
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.et_timesette  :
-                TimePickerDialog dialog_time = new TimePickerDialog();
-                showPopUp(dialog_time,DIALOG_TIME);
+                dispatchTakePictureIntent();
                 break;
             case R.id.btn_date:
                 DatePickerDialog dialog_date = new DatePickerDialog();
@@ -99,5 +114,54 @@ public class    CreateTodo extends AppCompatActivity implements DatePickerDialog
     }
     private void showPopUp(DialogFragment frag, String str) {
         frag.show(getSupportFragmentManager(),str);
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Log.d(TAG,"started 1");
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            File photoFile = null;
+            Log.d(TAG,"started 2");
+            try {
+                photoFile = createImageFile();
+                Log.d(TAG,"started 3");
+            } catch (IOException ex) {
+            }
+            if(photoFile != null){
+                photoURI = FileProvider.getUriForFile(this, "com.mystic.todolistapp.fileprovider", photoFile);
+                Log.d(TAG,"started 4");
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                Log.d(TAG,"started 5");
+                Log.d("Create",""+photoURI);
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                Log.d(TAG,"started 6");
+            }
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Glide.with(getApplicationContext()).load(photoURI).into(imageView);
+        }
+
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        String currentPhotoPath = image.getAbsolutePath();
+        return image;
     }
 }

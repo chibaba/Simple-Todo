@@ -1,6 +1,7 @@
 package com.example.todolist_crud;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,13 +24,7 @@ public class TodoActivity extends AppCompatActivity {
     private FloatingActionButton btn_flt;
     private TextView empty_tv;
     private TextView textView;
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setEmptyText();
-        myAdapter.notifyDataSetChanged();
-    }
+    private TaskViewModel tmodel;
 
 
     @Override
@@ -39,20 +34,32 @@ public class TodoActivity extends AppCompatActivity {
         defineViews();
         dListOfModel = new ArrayList<>();
         dListOfModel = TodoLab.get().getTodos();
-        myAdapter = new TaskAdapter(dListOfModel, this);
+        myAdapter = new TaskAdapter(this);
 
         myRecyclerView.setAdapter(myAdapter);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         Log.d("TaskListActivity",""+myAdapter.getItemCount());
-        btn_flt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startAnother();
-            }
+        tmodel = new ViewModelProvider(this).get(TaskViewModel.class);
+
+        tmodel.getLiveTasks().observe(this, tasks -> {
+            //Gets access to the livedata
+            dListOfModels = tasks;
+            setEmptyText();
+            mAdapter.setTask(tasks);
+
         });
+
+        btn_flt.setOnClickListener(view -> startAnother());
+
+        textView.setOnClickListener(view -> startAnother());
 
         removalListener();
 
+    }
+
+    private void startAnother() {
+        Intent intent = new Intent(TaskListActivity.this, CreateTaskActivity.class);
+        startActivity(intent);
     }
 
     private void removalListener() {
@@ -78,13 +85,23 @@ public class TodoActivity extends AppCompatActivity {
         empty_tv = findViewById(R.id.empty_tv);
         textView = findViewById(R.id.et_tv);
     }
+
     private void setEmptyText() {
-        if (myAdapter.getItemCount() > 0) {
-            Log.d("TodActivity", "" + myAdapter.getItemCount());
+        if(dListOfModels.size() > 0){
             empty_tv.setVisibility(View.GONE);
-        } else {
+        }else{
             empty_tv.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void removalListener(){
+        mAdapter.setListenerForAdapter(position -> {
+            Task task = mListOfTasks.get(position);
+            model.delete(task);
+            mAdapter.notifyItemRemoved(position);
+            setEmptyText();
+        });
 
     }
+
 }

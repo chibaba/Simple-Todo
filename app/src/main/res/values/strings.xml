@@ -4,10 +4,10 @@
     <string name="placeholder"> Title</string>
     <string name="actualDate">Actual Date</string>
     <string name="checkedBox">Checked Box</string>
-    <string name="set_time">Set Time</string>
     <string name="project">Create Todo list</string>
     <string name="title">enter title</string>
     <string name="to_delete">To delete</string>
+    <string name="set_time">Take A Picture</string>
     <string name="date_setter_head">Please enter a date</string>
     <string name="add_todos">Add Todos</string>
     <string name="todo">TODO</string>
