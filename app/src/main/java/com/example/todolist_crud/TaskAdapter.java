@@ -6,19 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Entity;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
+
+public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Model> dTask = new ArrayList<>();
     private Context context ;
@@ -80,7 +81,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         } else {
             //With image
             TaskHolder taskHolder = (TaskHolder) holder;
-            taskHolder.spectitle.setText(dBindTask.getTitle());
+            taskHolder.specTitle.setText(dBindTask.getTitle());
             if(dBindTask.getDate() != null){
                 taskHolder.dateStr.setText(dBindTask.getDate());
             }
@@ -92,7 +93,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 } else{
                     dBindTask.setDone(0);
                 }
-                TodoLab.getsTodoLab(context).updateModel(dBindTask);
+                TodoLab.getsTodoLab(context).updateTask(dBindTask);
             });
 
 
@@ -131,7 +132,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             specTitle = itemView.findViewById(R.id.et_realTitle);
             dateStr = itemView.findViewById(R.id.date_str);
             box = itemView.findViewById(R.id.et_checkBox);
-            imag = itemview.findViewById(R.id.taskimaage);
+            imag = itemView.findViewById(R.id.imgView);
             imageView = itemView.findViewById(R.id.imageView);
 
             imageView.setOnClickListener(view -> {

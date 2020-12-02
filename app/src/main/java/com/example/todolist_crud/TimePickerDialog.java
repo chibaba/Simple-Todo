@@ -14,6 +14,8 @@ public class TimePickerDialog extends  DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstance) {
         view = LayoutInflater.from(getActivity()).inflate(R.layout.time_picker, null);
+        assert  getActivity() != null ;
+
         return new AlertDialog.Builder(getActivity())
                 .setTitle("please set the time")
                 .setView(view)
